@@ -8,5 +8,6 @@ data:
   postgres_user: "{{ .Values.env.postgresUser }}"
   postgres_password: "{{ .Values.env.postgresPassword }}"
   mongo_uri: "{{ .Values.env.mongoUri }}"
+  vault_enabled: "{{ .Values.env.vaultEnabled }}"
   report_path: "{{ .Values.env.reportPath }}"
   log_path: "{{ .Values.env.logPath }}"

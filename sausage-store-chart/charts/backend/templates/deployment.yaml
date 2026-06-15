@@ -54,6 +54,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-{{ .Chart.Name }}-conf
                   key: mongo_uri
+            - name: SPRING_CLOUD_VAULT_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-{{ .Chart.Name }}-conf
+                  key: vault_enabled
             - name: REPORT_PATH
               valueFrom:
                 configMapKeyRef:
@@ -84,6 +89,8 @@ spec:
               path: postgres_password
             - key: mongo_uri
               path: mongo_uri
+            - key: vault_enabled
+              path: vault_enabled
             - key: report_path
               path: report_path
             - key: log_path
