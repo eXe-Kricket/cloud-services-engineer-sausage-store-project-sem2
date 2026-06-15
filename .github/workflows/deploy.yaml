@@ -78,7 +78,10 @@ jobs:
           uses: azure/setup-helm@v3
 
         - name: Package Helm chart
-          run: helm package sausage-store-chart
+          run: |
+            helm package sausage-store-chart \
+              --version "0.1.${{ github.run_number }}" \
+              --app-version "${{ github.sha }}"
 
         - name: Upload Helm chart to Nexus
           run: |
@@ -117,6 +120,7 @@ jobs:
         - name: Deploy Helm chart to Kubernetes
           run: |
             helm upgrade --install sausage-store nexus/sausage-store \
+              --version "0.1.${{ github.run_number }}" \
               --namespace "$SAUSAGE_STORE_NAMESPACE" \
               --set backend.image="$DOCKER_USER/sausage-backend:latest" \
               --set frontend.image="$DOCKER_USER/sausage-frontend:latest" \
